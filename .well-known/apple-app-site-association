@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["REPLACE_WITH_APPLE_TEAM_ID.com.vitursa.yahrzeityenta"],
+        "appIDs": ["2Y8H96GK7A.com.vitursa.yahrzeityenta"],
         "components": [{ "/": "/s", "comment": "Share links open in the app" }, { "/": "/s/*" }]
       }
     ]
