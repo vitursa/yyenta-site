@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.vitursa.yahrzeityenta",
-      "sha256_cert_fingerprints": ["REPLACE_WITH_THE_FINGERPRINT_FROM: eas credentials -p android"]
+      "sha256_cert_fingerprints": ["FE:98:9B:AB:E4:BA:8C:E1:75:47:0B:B7:7D:99:87:D5:1E:63:8B:45:60:10:91:21:A2:DE:36:C1:8C:8B:59:2F"]
     }
   }
 ]
