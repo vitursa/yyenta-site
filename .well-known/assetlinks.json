@@ -4,7 +4,10 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.vitursa.yahrzeityenta",
-      "sha256_cert_fingerprints": ["FE:98:9B:AB:E4:BA:8C:E1:75:47:0B:B7:7D:99:87:D5:1E:63:8B:45:60:10:91:21:A2:DE:36:C1:8C:8B:59:2F"]
+      "sha256_cert_fingerprints": [
+        "FE:98:9B:AB:E4:BA:8C:E1:75:47:0B:B7:7D:99:87:D5:1E:63:8B:45:60:10:91:21:A2:DE:36:C1:8C:8B:59:2F",
+        "95:3F:82:25:33:BD:6F:98:24:45:D4:24:0A:FF:00:41:A2:78:E6:46:E6:37:48:47:B1:02:39:91:7E:82:50:7D"
+      ]
     }
   }
 ]
