@@ -3,38 +3,315 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yahrzeit Yenta</title>
-<meta name="description" content="Enter your yahrzeits once. The yenta remembers the rest: the right Hebrew date every year, as many reminders as you want, and every kaddish yahrzeit marked as one.">
+<title>Yahrzeit Yenta: yahrzeit reminders, never on Shabbos</title>
+<meta name="description" content="Enter your yahrzeits once. The yenta remembers the rest: the right Hebrew date every year, as many reminders as you want, and never on Shabbos or Yom Tov.">
+<meta property="og:title" content="Yahrzeit Yenta">
+<meta property="og:description" content="Enter your yahrzeits once. The yenta remembers the rest.">
+<meta property="og:image" content="https://yyenta.vitursa.com/img/share-card.jpg">
+<meta property="og:url" content="https://yyenta.vitursa.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2B2340">
+<link rel="icon" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,600;1,6..72,500&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; background: #2B2340; color: #FFF3E0; font: 19px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 32rem; margin: 0 auto; padding: 4rem 1.5rem; text-align: center; }
-  h1 { font-family: Georgia, serif; font-size: 2.6rem; margin: 1.5rem 0 0; }
-  .tag { font-family: Georgia, serif; font-style: italic; color: #F0B25A; font-size: 1.3rem; margin: 0.5rem 0 2rem; }
-  .lead { font-size: 1.2rem; color: #FFF3E0; margin: 0 0 2rem; }
-  p { color: #E8DDF0; }
-  a { color: #F0B25A; }
-  ul { list-style: none; padding: 0; margin: 0 0 2.5rem; text-align: start; display: grid; gap: 1rem; }
-  li { background: rgba(255, 243, 224, 0.06); border: 1px solid rgba(255, 243, 224, 0.12); border-radius: 18px; padding: 1rem 1.2rem; color: #E8DDF0; }
-  li strong { display: block; color: #FFF3E0; font-size: 1.05rem; margin-bottom: 0.2rem; }
-  .aside { display: block; margin-top: 0.3rem; font-family: Georgia, serif; font-style: italic; color: #F0B25A; }
-  .soon { color: #BDB2C8; font-size: 0.95rem; }
+  :root {
+    --aubergine: #2B2340;
+    --aubergine-deep: #1E1830;
+    --cream: #F7F1E6;
+    --paper: #FFFCF6;
+    --sand: #EFE5D3;
+    --ink: #2B2340;
+    --ink2: #5A5169;
+    --line: #E0D3BE;
+    --amber: #E3A13B;
+    --amber-light: #F0B25A;
+    --amber-ink: #8F4D0B;
+    --amber-soft: #FBEBD0;
+    --on-dark: #FFF3E0;
+    --on-dark-2: #D9CFE6;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font: 18px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { text-wrap: balance; }
+  a { color: inherit; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* ---------- Hero ---------- */
+  .hero { background: radial-gradient(120% 90% at 85% 10%, #3A2F55 0%, var(--aubergine) 55%, var(--aubergine-deep) 100%); color: var(--on-dark); overflow: hidden; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 0; }
+  .brand { display: flex; align-items: center; gap: .6rem; font-family: var(--serif); font-weight: 600; font-size: 1.35rem; text-decoration: none; }
+  .brand img { width: 2.4rem; height: 2.4rem; }
+  .nav-cta { font-weight: 600; font-size: .95rem; text-decoration: none; padding: .55rem 1rem; border-radius: 999px; border: 1.5px solid rgba(255,243,224,.35); }
+  .nav-cta:hover { border-color: var(--amber-light); color: var(--amber-light); }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 2rem; align-items: center; padding: 2.5rem 0 5rem; }
+  .eyebrow { display: inline-block; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; color: var(--amber-light); background: rgba(240,178,90,.12); padding: .35rem .75rem; border-radius: 999px; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.02; letter-spacing: -.015em; margin: 1rem 0 1rem; }
+  .lead { font-size: 1.25rem; color: var(--on-dark-2); max-width: 30rem; margin: 0 0 2rem; }
+  .stores { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; }
+  .play-badge img { height: 3.6rem; width: auto; margin: -.45rem; }
+  .soon { display: inline-flex; align-items: center; gap: .6rem; padding: .7rem 1.1rem; border-radius: .8rem; border: 1.5px dashed rgba(255,243,224,.4); color: var(--on-dark-2); font-size: .95rem; line-height: 1.2; }
+  .soon svg { width: 1.3rem; height: 1.3rem; flex: none; }
+  .soon strong { display: block; color: var(--on-dark); }
+  .free { margin-top: 1rem; font-size: .9rem; color: var(--on-dark-2); }
+
+  .stage { position: relative; min-height: 26rem; }
+  .stage .glow { position: absolute; inset: 8% 6% 4% 6%; border-radius: 50%; background: radial-gradient(circle, rgba(240,178,90,.28), rgba(240,178,90,0) 68%); }
+  .stage .yenta { position: absolute; width: 62%; left: 19%; bottom: 0; filter: drop-shadow(0 18px 30px rgba(0,0,0,.35)); }
+  .note { position: absolute; width: 17.5rem; max-width: 80%; background: var(--paper); color: var(--ink); border-radius: 1.1rem; padding: .8rem .95rem; box-shadow: 0 14px 34px rgba(10,6,20,.38); font-size: .9rem; line-height: 1.35; opacity: 0; transform: translateY(14px) scale(.97); animation: pop 12s infinite; }
+  .note .head { display: flex; align-items: center; gap: .45rem; font-size: .72rem; font-weight: 700; color: var(--ink2); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .25rem; }
+  .note .head img { width: 1.15rem; height: 1.15rem; border-radius: .3rem; }
+  .note .head span { margin-left: auto; font-weight: 600; text-transform: none; letter-spacing: 0; }
+  .n1 { top: 4%; left: -4%; animation-delay: 0s; }
+  .n2 { top: 30%; right: -6%; animation-delay: 4s; }
+  .n3 { top: 58%; left: -2%; animation-delay: 8s; }
+  @keyframes pop {
+    0% { opacity: 0; transform: translateY(14px) scale(.97); }
+    4%, 30% { opacity: 1; transform: none; }
+    36%, 100% { opacity: 0; transform: translateY(-8px) scale(.98); }
+  }
+
+  /* ---------- Shabbos band ---------- */
+  .band { background: var(--amber); color: var(--aubergine); }
+  .band .wrap { display: flex; align-items: center; gap: 1.25rem; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .band svg { width: 2.6rem; height: 2.6rem; flex: none; }
+  .band p { margin: 0; font-size: 1.1rem; }
+  .band strong { font-family: var(--serif); font-size: 1.55rem; font-weight: 600; display: block; line-height: 1.15; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 5rem 0; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 4vw, 2.9rem); line-height: 1.08; margin: 0 0 .75rem; letter-spacing: -.01em; }
+  .sub { color: var(--ink2); font-size: 1.15rem; max-width: 36rem; margin: 0 0 2.75rem; }
+  .center { text-align: center; }
+  .center .sub { margin-left: auto; margin-right: auto; }
+
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 1.4rem; padding: 1.6rem 1.5rem 1.5rem; box-shadow: 0 1px 0 rgba(43,35,64,.04), 0 10px 26px rgba(43,35,64,.06); transition: transform .2s ease, box-shadow .2s ease; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(43,35,64,.1); }
+  .card .pose { width: 4.6rem; height: 5.05rem; margin-bottom: .9rem; }
+  .card h3 { font-family: var(--serif); font-weight: 600; font-size: 1.4rem; line-height: 1.15; margin: 0 0 .45rem; }
+  .card p { margin: 0; color: var(--ink2); }
+  .card .aside { display: block; margin-top: .55rem; font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--amber-ink); }
+
+  .screens { background: var(--sand); }
+  .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: start; }
+  .phone { margin: 0; }
+  .phone .frame { background: var(--aubergine); border-radius: 2.2rem; padding: .7rem; box-shadow: 0 24px 50px rgba(43,35,64,.22); }
+  .phone .frame img { border-radius: 1.6rem; aspect-ratio: 800 / 1229; object-fit: cover; object-position: top; width: 100%; }
+  .phone figcaption { text-align: center; margin-top: 1rem; font-weight: 600; }
+  .phone figcaption span { display: block; font-weight: 400; color: var(--ink2); font-size: .95rem; }
+  .phone:nth-child(2) { margin-top: 2.5rem; }
+
+  .private { display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 2rem; padding: 2.5rem; }
+  .private img { width: 10rem; }
+  .private h2 { font-size: clamp(1.8rem, 3.4vw, 2.4rem); }
+  .private p { margin: 0; color: var(--ink2); font-size: 1.1rem; }
+  .private .aside-h { display: block; margin-top: .3rem; font-size: .62em; font-weight: 500; color: var(--amber-ink); }
+  .private .aside-h em { font-style: italic; }
+  .private ul { margin: 1rem 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .6rem; }
+  .private li { background: var(--amber-soft); color: var(--amber-ink); font-weight: 700; font-size: .9rem; padding: .4rem .8rem; border-radius: 999px; }
+
+  .final { background: var(--aubergine); color: var(--on-dark); border-radius: 2rem; padding: 3.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+  .final img.pose { width: 9rem; margin: 0 auto 1rem; }
+  .final h2 { color: var(--on-dark); }
+  .final .sub { color: var(--on-dark-2); margin-left: auto; margin-right: auto; }
+  .final .stores { justify-content: center; }
+
+  footer { padding: 2.5rem 0 3rem; color: var(--ink2); font-size: .95rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between; }
+  footer nav { padding: 0; gap: 1.5rem; }
+  footer a { color: var(--ink2); }
+
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: .4rem; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; padding-bottom: 3rem; text-align: center; }
+    .lead { margin-left: auto; margin-right: auto; }
+    .stores { justify-content: center; }
+    .stage { min-height: 24rem; max-width: 26rem; margin: 0 auto; width: 100%; }
+    .features { grid-template-columns: 1fr 1fr; }
+    .phones { grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    .phone:nth-child(2) { margin-top: 1.5rem; }
+    .phone .frame { border-radius: 1.4rem; padding: .4rem; }
+    .phone .frame img { border-radius: 1.1rem; }
+    .phone figcaption span { display: none; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 17px; }
+    .nav-cta { display: none; }
+    .features { grid-template-columns: 1fr; }
+    .phones { grid-template-columns: 1fr; max-width: 17rem; margin: 0 auto; gap: 2rem; }
+    .phone:nth-child(2) { margin-top: 0; }
+    .phone figcaption span { display: block; }
+    .private { grid-template-columns: 1fr; text-align: center; padding: 2rem 1.25rem; }
+    .private img { margin: 0 auto; width: 8rem; }
+    .private ul { justify-content: center; }
+    .band .wrap { flex-direction: column; text-align: center; }
+    .note { width: 15rem; font-size: .85rem; }
+    .n2 { right: -2%; }
+    section { padding: 3.5rem 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .note { animation: none; opacity: 1; transform: none; }
+    .n2, .n3 { display: none; }
+    .card:hover { transform: none; }
+  }
 </style>
 </head>
 <body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav aria-label="Main">
+      <a class="brand" href="/"><img src="img/mark.svg" alt="">Yahrzeit Yenta</a>
+      <a class="nav-cta" href="#get">Get the app</a>
+    </nav>
+
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Yahrzeit reminders</span>
+        <h1>You'll never hear the end of it.</h1>
+        <p class="lead">Enter your yahrzeits once. The yenta remembers the rest: the right Hebrew date every year, as many reminders as you want, and never on Shabbos or Yom Tov.</p>
+        <div class="stores" id="get">
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.vitursa.yahrzeityenta">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+          </a>
+          <span class="soon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.8c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg>
+            <span><strong>Coming soon</strong>to iPhone, iPad and Mac</span>
+          </span>
+        </div>
+        <p class="free">Free. No account, no ads.</p>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        <div class="glow"></div>
+        <img class="yenta" src="img/yenta-onThePhone.svg" alt="">
+        <div class="note n1"><div class="head"><img src="img/icon-180.png" alt="">Yahrzeit Yenta<span>now</span></div>Nu? Zaidy's yahrzeit begins Monday night. Is there a candle in the house?</div>
+        <div class="note n2"><div class="head"><img src="img/icon-180.png" alt="">Yahrzeit Yenta<span>Fri 2:00 PM</span></div>Can you believe Bubby Esther's yahrzeit is already coming up? It begins Motzei Shabbos.</div>
+        <div class="note n3"><div class="head"><img src="img/icon-180.png" alt="">Yahrzeit Yenta<span>6:12 PM</span></div>Tonight begins the 12th yahrzeit of Zaidy. Light the candle before sunset. Kaddish at Maariv.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="band">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.7 14.5A8.5 8.5 0 0 1 9.5 3.3a.6.6 0 0 0-.8-.7A9.7 9.7 0 1 0 21.4 15.3a.6.6 0 0 0-.7-.8z"/></svg>
+    <p><strong>Quiet on Shabbos and Yom Tov.</strong>The app does nothing on Shabbos or Yom Tov in your city. A reminder that would land then comes before instead, and she tells you so when you set it.</p>
+  </div>
+</div>
+
 <main>
-  <svg width="140" height="140" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="52" r="40" fill="#E9A23B" opacity=".16"/><path d="M50,10 C66,30 76,50 70,68 C66,82 34,82 30,68 C24,50 34,30 50,10 Z" fill="#E9A23B"/><path d="M50,44 C57,54 59,63 56,71 C54,76 46,76 44,71 C41,63 43,54 50,44 Z" fill="#FBE3A6"/><path d="M31,54 Q40,55 47,59 Q47,67 40,68 Q33,68 32,62 Z" fill="#FFFFFF" fill-opacity=".45" stroke="#2B2340" stroke-width="3.2" stroke-linejoin="round"/><path d="M69,54 Q60,55 53,59 Q53,67 60,68 Q67,68 68,62 Z" fill="#FFFFFF" fill-opacity=".45" stroke="#2B2340" stroke-width="3.2" stroke-linejoin="round"/><path d="M47,60 Q50,57 53,60" fill="none" stroke="#2B2340" stroke-width="2.6"/><rect x="38" y="84" width="24" height="6" rx="3" fill="#FFF3E0" opacity=".85"/></svg>
-  <h1>Yahrzeit Yenta</h1>
-  <p class="tag">You'll never hear the end of it.</p>
-  <p class="lead">Enter your yahrzeits once. The yenta remembers the rest.</p>
-  <ul>
-    <li><strong>The right Hebrew date, every year.</strong>Enter the Hebrew date, or just the English one and whether it was after sunset. She works out the Hebrew date for you, even the tricky leap-year ones.</li>
-    <li><strong>As many reminders as you want.</strong>A week before, erev Shabbos, the evening it begins, or any day you pick. Set one or set five, for each yahrzeit.</li>
-    <li><strong>Kaddish, covered.</strong>Mark the yahrzeits you say kaddish for, and every reminder for them says so.</li>
-    <li><strong>Bring your list.</strong>Paste it, open a spreadsheet, or let her find the yahrzeits already in your calendar.</li>
-    <li><strong>Share with the family.</strong>Pick the yahrzeits, pick who gets them. They add them with one tap. <em class="aside">...Okay, maybe it&#39;s two taps. Is one more tap going to kill you?</em></li>
-  </ul>
-  <p class="soon">Now being tested. Coming to iPhone and Android.</p>
-  <p><a href="/privacy.html">Privacy</a></p>
+  <section>
+    <div class="wrap">
+      <h2>Everything a yahrzeit needs.<br>Nothing it doesn't.</h2>
+      <p class="sub">She's warm, she's quick, and she doesn't forget. Ever.</p>
+      <div class="features">
+        <article class="card">
+          <img class="pose" src="img/yenta-fingerRaised.svg" alt="">
+          <h3>The right Hebrew date, every year</h3>
+          <p>Enter the Hebrew date, or just the English one and whether it was after sunset. She works out the Hebrew date for you, even the tricky leap-year ones.</p>
+        </article>
+        <article class="card">
+          <img class="pose" src="img/yenta-onThePhone.svg" alt="">
+          <h3>As many reminders as you want</h3>
+          <p>A week before, erev Shabbos, the evening it begins, or any day you pick. Set one or set five, for each yahrzeit.</p>
+        </article>
+        <article class="card">
+          <img class="pose" src="img/yenta-handOnHeart.svg" alt="">
+          <h3>Kaddish, covered</h3>
+          <p>Mark the yahrzeits you say kaddish for, and every reminder for them says so.</p>
+        </article>
+        <article class="card">
+          <img class="pose" src="img/yenta-peering.svg" alt="">
+          <h3>Bring your list</h3>
+          <p>Paste it, open a spreadsheet, or let her find the yahrzeits already in your calendar.</p>
+        </article>
+        <article class="card">
+          <img class="pose" src="img/yenta-waving.svg" alt="">
+          <h3>Share with the family</h3>
+          <p>Pick the yahrzeits, pick who gets them. They add them with one tap.<span class="aside">...Okay, maybe it's two taps. Is one more tap going to kill you?</span></p>
+        </article>
+        <article class="card">
+          <img class="pose" src="img/yenta-nodding.svg" alt="">
+          <h3>In your calendar, on all your devices</h3>
+          <p>She can keep every yahrzeit in your calendar, fifteen years ahead, and keep your list the same on your iPhone, iPad and Mac.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="screens">
+    <div class="wrap center">
+      <h2>A few questions, then she stops asking. Mostly.</h2>
+      <p class="sub">Set it up in a minute, in your own customs and your own words.</p>
+      <div class="phones">
+        <figure class="phone">
+          <div class="frame"><img src="img/screen-customs.jpg" alt="The customs question: Ashkenazi or Sephardi, and which Adar you keep" loading="lazy"></div>
+          <figcaption>Your customs<span>Ashkenazi, Sephardi, or item by item</span></figcaption>
+        </figure>
+        <figure class="phone">
+          <div class="frame"><img src="img/screen-import.jpg" alt="Import: paste a list, choose a file, look in your calendar, or open a shared link" loading="lazy"></div>
+          <figcaption>Bring your list<span>From anywhere it already lives</span></figcaption>
+        </figure>
+        <figure class="phone">
+          <div class="frame"><img src="img/screen-calendar.jpg" alt="Keep my yahrzeits in my calendar, fifteen years ahead" loading="lazy"></div>
+          <figcaption>In your calendar<span>Fifteen years ahead, kept up to date</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="private">
+        <img src="img/yenta-handOnHeart.svg" alt="">
+        <div>
+          <h2>What you tell the yenta, stays with the yenta. <span class="aside-h">(But it <em>really</em> does.)</span></h2>
+          <p>No account, no ads. Your yahrzeits stay on your phone unless you share them. <a href="privacy.html">Read the privacy policy</a>.</p>
+          <ul><li>No account</li><li>No ads</li><li>No tracking</li><li>Free</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="final">
+        <img class="pose" src="img/yenta-waving.svg" alt="">
+        <h2>Nu? What are you waiting for?</h2>
+        <p class="sub">Enter your yahrzeits once. The yenta remembers the rest.</p>
+        <div class="stores">
+          <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.vitursa.yahrzeityenta">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+          </a>
+          <span class="soon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.2 5.8c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg>
+            <span><strong>Coming soon</strong>to iPhone, iPad and Mac</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <span>Yahrzeit Yenta, by Vitursa</span>
+    <nav aria-label="Footer">
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:yyenta@vitursa.com">yyenta@vitursa.com</a>
+    </nav>
+  </div>
+</footer>
+
 </body>
 </html>
