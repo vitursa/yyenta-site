@@ -95,6 +95,9 @@
   .card .pose { width: 4.6rem; height: 5.05rem; margin-bottom: .9rem; }
   .card h3 { font-family: var(--serif); font-weight: 600; font-size: 1.4rem; line-height: 1.15; margin: 0 0 .45rem; }
   .card p { margin: 0; color: var(--ink2); }
+  .card.wide { grid-column: 1 / -1; display: flex; align-items: center; gap: 1.5rem; }
+  .card.wide .pose { margin-bottom: 0; flex: none; }
+  .card .new { display: inline-block; margin-bottom: .5rem; padding: .15rem .6rem; border-radius: 99px; background: var(--amber); color: var(--aubergine); font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
   .card .aside { display: block; margin-top: .55rem; font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--amber-ink); }
 
   .screens { background: var(--sand); }
@@ -142,6 +145,8 @@
   }
   @media (max-width: 560px) {
     body { font-size: 17px; }
+    .card.wide { display: block; }
+    .card.wide .pose { margin-bottom: .9rem; }
     .nav-cta { display: none; }
     .features { grid-template-columns: 1fr; }
     .phones { grid-template-columns: 1fr; max-width: 17rem; margin: 0 auto; gap: 2rem; }
@@ -176,7 +181,7 @@
       <div>
         <span class="eyebrow">Yahrzeit reminders</span>
         <h1>You'll never hear the end of it.</h1>
-        <p class="lead">Enter your yahrzeits once. The yenta remembers the rest: the right Hebrew date every year (even the tricky leap-year ones), as many reminders as you want, importing, sharing and more.</p>
+        <p class="lead">Enter your yahrzeits once. The yenta remembers the rest: the right Hebrew date every year (even the tricky leap-year ones), as many reminders as you want, importing, sharing and more. And now, Hebrew birthdays too!</p>
         <div class="stores" id="get">
           <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.vitursa.yahrzeityenta">
             <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
@@ -205,6 +210,14 @@
       <h2>Everything a yahrzeit needs.<br>Nothing it doesn't.</h2>
       <p class="sub">She's warm, she's quick, and she doesn't forget. Ever.</p>
       <div class="features">
+        <article class="card wide">
+          <img class="pose" src="img/yenta-waving.svg" alt="">
+          <div>
+            <span class="new">New</span>
+            <h3>Hebrew birthdays too</h3>
+            <p>Switch to Birthdays and she keeps those on the Hebrew date as well. Born in Adar? In a leap year she knows it's Adar II.</p>
+          </div>
+        </article>
         <article class="card">
           <img class="pose" src="img/yenta-fingerRaised.svg" alt="">
           <h3>The right Hebrew date, every year</h3>
